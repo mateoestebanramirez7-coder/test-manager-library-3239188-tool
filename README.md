@@ -1,50 +1,35 @@
 # test-manager-library-3239188-tool
 
-> **Prueba técnica · Ficha ADSO 3239188**
-> Horario: **jueves 5 de noviembre de 2026, de 7:00 p. m. a 11:00 p. m.** (hora Colombia). Entrega a las **11:00 p. m.**
+Utilidades de *Manager Library*: sembrador de datos de demostración. Prueba técnica SDD · Ficha ADSO 3239188.
 
-Este repositorio guarda las **utilidades** de *Manager Library*: el sembrador de datos de demostración, que usa la API. **Empieza vacío a propósito**: se construye en el fork de cada aprendiz.
+## Papel en el spec
 
-## Instrucciones
+Genera datos reales para la feria de presentación y para la prueba de carga de RNF-1 (búsqueda en menos de 300 ms con 5 000 libros). Tarea T-21.
 
-Cada aprendiz debe **crear el fork** de los seis repositorios del proyecto y **resolver el proyecto
-con el spec planteado**.
+## Regla de diseño
 
-1. Hacer fork, a su cuenta de GitHub, de cada repositorio de la tabla del final.
-2. Leer el spec en [`test-manager-library-3239188-docs`](https://github.com/code-sena/test-manager-library-3239188-docs).
-   Se entrega en dos versiones: `spec-python/` y `spec-.net/`.
-3. Desarrollar en los forks.
+El sembrador usa **únicamente la API**, nunca SQL directo (`data-model.md` §9). Así respeta todas las reglas de negocio: ejemplares descontados, vencimiento a 14 días, valores congelados y máximo 3 libros por socio.
 
-## El reto se desarrolla con React y PHP (Laravel)
+## Qué debe generar
 
-El spec está escrito para Python y para .NET, pero el reto **no** se hace en esos lenguajes:
-
-| Capa | Tecnología del reto |
+| Dato | Cantidad mínima |
 |---|---|
-| Frontend | React |
-| Backend | PHP con Laravel |
+| Libros | 40, repartidos en las cinco categorías |
+| Socios | 10 |
+| Préstamos | 15 |
+| Préstamos con líneas vencidas | 3 |
 
-Lo que el spec define sobre el negocio —historias, criterios de aceptación, reglas, contrato de la
-API, modelo de datos— se respeta. Lo que define sobre la tecnología se traduce a React y Laravel.
+El administrador inicial no se siembra aquí: lo crea el arranque de la API desde variables de entorno.
 
-## La prueba no consiste en escribir el código
+## Evidencia esperada
 
-El propósito principal es ver la **capacidad de desempeño con SDD** (*Spec-Driven Development*,
-desarrollo guiado por especificación): cómo se lee, se interpreta y se aplica una especificación
-para llevarla a un stack distinto. El código es el medio, no el fin.
+Tras ejecutarlo, `GET /loans/overdue` devuelve 3 líneas y `GET /reports/most-borrowed` tiene filas.
 
-## Entrega
+## Estado
 
-Cuenta lo que quede **subido a los forks antes de las 11:00 p. m.** Lo que llegue después no se revisa.
-No hay prórroga: suban avances parciales con commits pequeños durante la prueba.
-
-## Los seis repositorios
-
-| Repositorio | Qué va ahí |
+| Elemento | Estado |
 |---|---|
-| [`test-manager-library-3239188-docs`](https://github.com/code-sena/test-manager-library-3239188-docs) | El spec: `spec-python/` y `spec-.net/` |
-| [`test-manager-library-3239188-api`](https://github.com/code-sena/test-manager-library-3239188-api) | Backend en PHP (Laravel) |
-| [`test-manager-library-3239188-app`](https://github.com/code-sena/test-manager-library-3239188-app) | Frontend en React |
-| [`test-manager-library-3239188-page`](https://github.com/code-sena/test-manager-library-3239188-page) | Sitio público estático de presentación |
-| [`test-manager-library-3239188-infra`](https://github.com/code-sena/test-manager-library-3239188-infra) | Contenedores, red, volúmenes y motor de base de datos vacío |
-| [`test-manager-library-3239188-tool`](https://github.com/code-sena/test-manager-library-3239188-tool) | Utilidades: sembrador de datos de demostración |
+| Diseño y alcance | Hecho (este documento) |
+| Implementación | Pendiente |
+
+> Este README describe el diseño previsto. No afirma que la implementación exista.
